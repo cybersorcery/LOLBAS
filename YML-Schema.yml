@@ -26,6 +26,7 @@ mapping:
     required: true
   "Created":
     type: date
+    format: '%Y-%M-%d'
     required: true
   "Commands":
     type: seq
@@ -56,6 +57,14 @@ mapping:
           "OperatingSystem":
             type: str
             required: true
+          "Tags":
+            type: seq
+            sequence:
+              - type: map
+                mapping:
+                  regex;(^[A-Z]):
+                    type: str
+            required: false
   "Full_Path":
     type: seq
     required: true
@@ -65,6 +74,7 @@ mapping:
           "Path":
             type: str
             required: true
+            pattern: '^(([cC]:)\\([a-zA-Z0-9\-\_\. \(\)\<\>]+\\)*([a-zA-Z0-9_\-\.]+\.[a-z0-9]{3})|no default)$'
   "Code_Sample":
     type: seq
     required: false
@@ -83,19 +93,19 @@ mapping:
             type: str
           "Sigma":
             type: str
-            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
+            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
           "Analysis":
             type: str
-            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
+            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
           "Elastic":
             type: str
-            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
+            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
           "Splunk":
             type: str
-            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
+            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
           "BlockRule":
             type: str
-            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
+            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
   "Resources":
     type: seq
     required: false
@@ -104,7 +114,8 @@ mapping:
         mapping:
           "Link":
             type: str
-            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
+            required: true
+            pattern: '^http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#~]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+$'
   "Acknowledgement":
     type: seq
     required: false
